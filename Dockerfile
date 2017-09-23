@@ -5,9 +5,9 @@ ENV shell="/usr/bin/jshell"
 VOLUME /tmp
 WORKDIR /opt/cloudterm/
 COPY target/cloudterm.jar .
-COPY ./restrict_fs.sh .
-RUN mkdir -p /home/tryjshell/.java && ./restrict_fs.sh
 RUN useradd -ms /bin/bash tryjshell
+COPY ./restrict_fs.sh .
+RUN ./restrict_fs.sh
 USER tryjshell
 CMD ["java","-jar","./cloudterm.jar"]
 EXPOSE 8080
