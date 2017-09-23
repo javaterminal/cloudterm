@@ -63,11 +63,11 @@ public class TerminalService {
         Path dataDir = Paths.get(tmpDir).resolve(".terminalfx");
         IOHelper.copyLibPty(dataDir);
 
-        Path systemRoot = Files.createTempDirectory(Paths.get(tmpDir), "systemRoot");
-        Files.createDirectories(systemRoot);
-        Path prefsFile = Files.createTempFile(systemRoot, ".userPrefs", null);
-        System.setProperty("java.util.prefs.systemRoot", systemRoot.normalize().toString());
-        System.setProperty("java.util.prefs.userRoot", prefsFile.normalize().toString());
+//        Path systemRoot = Files.createTempDirectory(Paths.get(tmpDir), "systemRoot");
+//        Files.createDirectories(systemRoot);
+//        Path prefsFile = Files.createTempFile(systemRoot, ".userPrefs", null);
+//        System.setProperty("java.util.prefs.systemRoot", systemRoot.normalize().toString());
+//        System.setProperty("java.util.prefs.userRoot", prefsFile.normalize().toString());
 
         if (Platform.isWindows()) {
             this.termCommand = "cmd.exe".split("\\s+");
