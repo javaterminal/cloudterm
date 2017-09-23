@@ -1,38 +1,42 @@
-function bootStrap() {
+document.addEventListener("DOMContentLoaded", function (event) {
 
-    hterm.defaultStorage = new lib.Storage.Memory();
+    function initializeTerminal() {
 
-    var t = new hterm.Terminal("cloudterm");
+        hterm.defaultStorage = new lib.Storage.Memory();
 
-    t.onTerminalReady = function () {
+        var t = new hterm.Terminal("cloudterm");
 
-        app.initializeStyles();
-        app.onTerminalInit();
+        t.onTerminalReady = function () {
 
-        var io = t.io.push();
+            app.initializeStyles();
+            app.onTerminalInit();
 
-        io.onVTKeystroke = function (str) {
-            app.onCommand(str);
+            var io = t.io.push();
+
+            io.onVTKeystroke = function (str) {
+                app.onCommand(str);
+            };
+
+            io.sendString = io.onVTKeystroke;
+
+            io.onTerminalResize = function (columns, rows) {
+                app.resizeTerminal(columns, rows);
+            };
+
+            t.installKeyboard();
+            app.onTerminalReady();
+
         };
+    }
 
-        io.sendString = io.onVTKeystroke;
-
-        io.onTerminalResize = function (columns, rows) {
-            app.resizeTerminal(columns, rows);
-        };
-
-        t.installKeyboard();
-        app.onTerminalReady();
-
-    };
 
     let protocol = location.protocol.indexOf("https") !== -1 ? "wss" : "ws";
     let ws = new WebSocket(protocol + "://" + location.host + "/terminal");
 
     ws.onopen = () => {
         console.log("Connection opened");
+        initializeTerminal();
         t.decorate(document.querySelector('#terminal'));
-        app.initializeStyles();
         t.showOverlay("Connection established", 1000);
     }
 
@@ -103,8 +107,4 @@ function bootStrap() {
         }
     };
 
-}
-
-document.addEventListener("DOMContentLoaded", function(event) {
-    setTimeout(bootStrap, 3000);
 });
