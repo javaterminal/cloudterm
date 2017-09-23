@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         hterm.defaultStorage = new lib.Storage.Memory();
 
-        var t = new hterm.Terminal("cloudterm");
+        window.t = new hterm.Terminal("cloudterm");
 
         t.onTerminalReady = function () {
 
