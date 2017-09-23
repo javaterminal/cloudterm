@@ -12,10 +12,10 @@ import java.nio.file.Paths;
 public class AppStarter {
 
     public static void main(String[] args) throws IOException {
-//        String tmpDir = System.getProperty("java.io.tmpdir");
-//        Path prefsPath = Files.createTempDirectory(Paths.get(tmpDir), "prefs");
-//        Files.createDirectories(prefsPath);
-//        System.setProperty("java.util.prefs.userRoot", prefsPath.toString());
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        Path prefsPath = Files.createTempDirectory(Paths.get(tmpDir), "prefs");
+        Files.createDirectories(prefsPath);
+        System.setProperty("java.util.prefs.userRoot", prefsPath.normalize().toString());
 
         SpringApplication.run(AppStarter.class, args);
     }
