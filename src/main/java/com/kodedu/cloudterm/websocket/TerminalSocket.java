@@ -24,12 +24,13 @@ public class TerminalSocket extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        System.err.println("Connection establised");
         terminalService.setWebSocketSession(session);
-        super.afterConnectionEstablished(session);
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        System.err.println("Handle text message " + message.getPayload());
         Map<String, String> messageMap = getMessageMap(message);
 
         if (messageMap.containsKey("type")) {
@@ -68,12 +69,12 @@ public class TerminalSocket extends TextWebSocketHandler {
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        super.handleTransportError(session, exception);
+        exception.printStackTrace();
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        super.afterConnectionClosed(session, status);
+        System.err.println("Connection closed " + status.getCode() + " " + status.getReason());
     }
 
     @Override
