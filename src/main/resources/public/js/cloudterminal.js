@@ -41,22 +41,27 @@ t.onTerminalReady = function () {
 
 };
 
-let ws = new WebSocket("ws://" + location.host + "/terminal");
+let protocol = location.protocol.indexOf("https") !== -1 ? "wss" : "ws";
+let ws = new WebSocket(protocol + "://" + location.host + "/terminal");
 
 ws.onopen = () => {
+    console.log("Connection opened");
     t.decorate(document.querySelector('#terminal'));
     t.showOverlay("Connection established", 1000);
 }
 
-ws.onerror = () => {
+ws.onerror = (e) => {
+    console.log(e);
     t.showOverlay("Connection error", 3000);
 }
 
 ws.onclose = () => {
+    console.log(e);
     t.showOverlay("Connection closed", 3000);
 }
 
 ws.onmessage = (e) => {
+    console.log(e);
     let data = JSON.parse(e.data);
     switch (data.type) {
         case "TERMINAL_PRINT":

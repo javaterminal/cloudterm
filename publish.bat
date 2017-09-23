@@ -1,1 +1,1 @@
-docker push rahmanusta/cloudterm
+docker push rahmanusta/tryjshell
