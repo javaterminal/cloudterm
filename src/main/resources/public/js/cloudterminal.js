@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function (event) {
+function bootStrap() {
 
     hterm.defaultStorage = new lib.Storage.Memory();
 
@@ -6,8 +6,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     t.onTerminalReady = function () {
 
-
-
+        app.initializeStyles();
         app.onTerminalInit();
 
         var io = t.io.push();
@@ -104,4 +103,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     };
 
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    setTimeout(bootStrap, 3000);
 });
