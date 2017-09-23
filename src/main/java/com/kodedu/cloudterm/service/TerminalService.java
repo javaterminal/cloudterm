@@ -58,7 +58,7 @@ public class TerminalService {
 
     private void initializeProcess() throws Exception {
 
-        String userHome = System.getProperty("user.home");
+        String userHome = System.getProperty("java.io.tmpdir");
         Path dataDir = Paths.get(userHome).resolve(".terminalfx");
         IOHelper.copyLibPty(dataDir);
 
