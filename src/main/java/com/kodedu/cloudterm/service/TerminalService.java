@@ -13,6 +13,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -50,7 +51,7 @@ public class TerminalService {
             try {
                 initializeProcess();
             } catch (Exception e) {
-                 e.printStackTrace();
+                e.printStackTrace();
             }
         });
 
@@ -62,13 +63,19 @@ public class TerminalService {
         Path dataDir = Paths.get(tmpDir).resolve(".terminalfx");
         IOHelper.copyLibPty(dataDir);
 
+        Path systemRoot = Files.createTempDirectory(Paths.get(tmpDir), "systemRoot");
+        Files.createDirectories(systemRoot);
+        Path prefsFile = Files.createTempFile(systemRoot, ".userPrefs", null);
+        System.setProperty("java.util.prefs.systemRoot", systemRoot.normalize().toString());
+        System.setProperty("java.util.prefs.userRoot", prefsFile.normalize().toString());
+
         if (Platform.isWindows()) {
             this.termCommand = "cmd.exe".split("\\s+");
         } else {
             this.termCommand = "/bin/bash -i".split("\\s+");
         }
 
-        if(Objects.nonNull(shellStarter)){
+        if (Objects.nonNull(shellStarter)) {
             this.termCommand = shellStarter.split("\\s+");
         }
 
