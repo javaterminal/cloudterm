@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     t.onTerminalReady = function () {
 
-        app.initializeStyles();
+
 
         app.onTerminalInit();
 
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     ws.onopen = () => {
         console.log("Connection opened");
         t.decorate(document.querySelector('#terminal'));
+        app.initializeStyles();
         t.showOverlay("Connection established", 1000);
     }
 
