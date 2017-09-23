@@ -58,8 +58,8 @@ public class TerminalService {
 
     private void initializeProcess() throws Exception {
 
-        String userHome = System.getProperty("java.io.tmpdir");
-        Path dataDir = Paths.get(userHome).resolve(".terminalfx");
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        Path dataDir = Paths.get(tmpDir).resolve(".terminalfx");
         IOHelper.copyLibPty(dataDir);
 
         if (Platform.isWindows()) {
@@ -77,7 +77,7 @@ public class TerminalService {
 
         System.setProperty("PTY_LIB_FOLDER", dataDir.resolve("libpty").toString());
 
-        this.process = PtyProcess.exec(termCommand, envs, userHome);
+        this.process = PtyProcess.exec(termCommand, envs, tmpDir);
 
         process.setWinSize(new WinSize(columns, rows));
         this.inputReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
