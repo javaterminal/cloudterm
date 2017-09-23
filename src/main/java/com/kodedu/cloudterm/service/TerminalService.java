@@ -50,7 +50,7 @@ public class TerminalService {
             try {
                 initializeProcess();
             } catch (Exception e) {
-                // e.printStackTrace();
+                 e.printStackTrace();
             }
         });
 
