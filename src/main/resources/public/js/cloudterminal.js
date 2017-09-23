@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             app.onTerminalReady();
 
         };
+
+        t.decorate(document.querySelector('#terminal'));
+        t.showOverlay("Connection established", 1000);
     }
 
 
@@ -36,8 +39,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     ws.onopen = () => {
         console.log("Connection opened");
         initializeTerminal();
-        t.decorate(document.querySelector('#terminal'));
-        t.showOverlay("Connection established", 1000);
     }
 
     ws.onerror = (e) => {
