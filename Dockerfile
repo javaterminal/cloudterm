@@ -6,7 +6,7 @@ VOLUME /tmp
 WORKDIR /opt/cloudterm/
 COPY target/cloudterm.jar .
 COPY ./restrict_fs.sh .
-RUN ./restrict_fs.sh
+RUN mkdir -p /home/tryjshell/.java && ./restrict_fs.sh
 RUN useradd -ms /bin/bash tryjshell
 USER tryjshell
 CMD ["java","-jar","./cloudterm.jar"]
