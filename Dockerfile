@@ -6,7 +6,7 @@ VOLUME /tmp
 WORKDIR /opt/cloudterm/
 COPY target/cloudterm.jar .
 COPY ./restrict_fs.sh .
-RUN ./restrict_fs.sh
+#RUN ./restrict_fs.sh
 USER nobody
 CMD ["java","-jar","./cloudterm.jar"]
 EXPOSE 8080
