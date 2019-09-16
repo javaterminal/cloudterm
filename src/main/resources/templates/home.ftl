@@ -12,7 +12,6 @@
 <body>
 <div id="terminal"></div>
 <script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
 <script src="js/xterm.min.js"></script>
 <script src="js/fullscreen.min.js"></script>
 <script src="js/main.js"></script>
