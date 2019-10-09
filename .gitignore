@@ -25,3 +25,6 @@ nbdist/
 
 *.iml
 /.idea/
+
+### VSCode
+.vscode/
