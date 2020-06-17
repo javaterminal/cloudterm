@@ -33,10 +33,6 @@ const resizeTerm = (term, ws) => {
   }
 };
 
-$(window).resize(function() {
-  resizeTerm(term, ws);
-});
-
 $(() => {
   let ws = new WebSocket('ws://' + location.host + '/terminal');
   let term = new Terminal({
@@ -57,6 +53,9 @@ $(() => {
     ws.send(action('TERMINAL_READY'));
     term.open(document.getElementById('#terminal'), true);
     term.toggleFullscreen(true);
+    $(window).resize(function() {
+      resizeTerm(term, ws);
+    });
   };
 
   ws.onmessage = e => {
