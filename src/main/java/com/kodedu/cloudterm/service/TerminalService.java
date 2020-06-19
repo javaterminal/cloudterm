@@ -44,20 +44,18 @@ public class TerminalService {
     }
 
     public void onTerminalReady() {
-
-        ThreadHelper.start(() -> {
-            isReady = true;
-            try {
-                initializeProcess();
-            } catch (Exception e) {
-                // e.printStackTrace();
-            }
-        });
-
+        try {
+            initializeProcess();
+            isReady =true;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     private void initializeProcess() throws Exception {
-
+        if(isReady){
+            return;
+        }
         String userHome = System.getProperty("user.home");
         Path dataDir = Paths.get(userHome).resolve(".terminalfx");
         IOHelper.copyLibPty(dataDir);
@@ -91,8 +89,6 @@ public class TerminalService {
         ThreadHelper.start(() -> {
             printReader(errorReader);
         });
-
-        process.waitFor();
 
     }
 
