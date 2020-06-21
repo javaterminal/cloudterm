@@ -73,7 +73,8 @@ public class TerminalSocket extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        super.afterConnectionClosed(session, status);
+        session.close();
+        terminalService.onTerminalClose();
     }
 
     @Override

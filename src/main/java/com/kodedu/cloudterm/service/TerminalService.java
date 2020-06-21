@@ -43,13 +43,8 @@ public class TerminalService {
 
     }
 
-    public void onTerminalReady() {
-        try {
-            initializeProcess();
-            isReady =true;
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+    public void onTerminalReady() throws Exception {
+        initializeProcess();
     }
 
     private void initializeProcess() throws Exception {
@@ -89,6 +84,7 @@ public class TerminalService {
         ThreadHelper.start(() -> {
             printReader(errorReader);
         });
+        this.isReady = true;
 
     }
 
@@ -147,6 +143,12 @@ public class TerminalService {
                 process.setWinSize(new WinSize(this.columns, this.rows));
             }
 
+        }
+    }
+
+    public void onTerminalClose(){
+        if(process.isAlive()){
+            process.destroy();
         }
     }
 
