@@ -147,7 +147,7 @@ public class TerminalService {
     }
 
     public void onTerminalClose(){
-        if(process.isAlive()){
+        if(null!=process && process.isAlive()){
             process.destroy();
         }
     }
