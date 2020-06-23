@@ -34,7 +34,8 @@ const resizeTerm = (term, ws) => {
 };
 
 $(() => {
-  let ws = new WebSocket('ws://' + location.host + '/terminal');
+  let sec = location.protocol.indexOf("https")>-1
+  let ws = new WebSocket(`${sec?"wss":"ws"}://${location.host}/terminal`);
   let term = new Terminal({
     cursorBlink: true,
   });
