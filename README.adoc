@@ -47,6 +47,8 @@ java -jar cloudterm.jar
 
 === Run on Docker
 
+Open the browser http://localhost:8080
+
 [source,bash]
 ----
 docker run -it --rm -p 8080:8080 rahmanusta/cloudterm

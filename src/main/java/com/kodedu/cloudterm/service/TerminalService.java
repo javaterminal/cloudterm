@@ -65,7 +65,7 @@ public class TerminalService {
         if (Platform.isWindows()) {
             this.termCommand = "cmd.exe".split("\\s+");
         } else {
-            this.termCommand = "/bin/bash -i".split("\\s+");
+            this.termCommand = "/bin/sh -i".split("\\s+");
         }
 
         if(Objects.nonNull(shellStarter)){
